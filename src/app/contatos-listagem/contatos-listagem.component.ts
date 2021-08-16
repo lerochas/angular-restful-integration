@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ContatoService } from '../contato.service';
 
 @Component({
   selector: 'app-contatos-listagem',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contatos-listagem.component.css']
 })
 export class ContatosListagemComponent implements OnInit {
+  contatos: Array<any> = [];
 
-  constructor() { }
+  constructor(private contatoService: ContatoService) { }
 
   ngOnInit(): void {
+    this.listar();
+  }
+
+  listar(){
+    this.contatoService.listar().subscribe(data => this.contatos = data);
   }
 
 }
